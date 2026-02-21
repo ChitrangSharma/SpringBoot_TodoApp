@@ -53,7 +53,6 @@ public class TodoController {
 
     @GetMapping
     public ResponseEntity<List<Todo>> getAllTodos(){
-//        return todoService.getAll();
         return ResponseEntity.ok(todoService.getAll());
     }
 
@@ -77,12 +76,7 @@ public class TodoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Todo> getTodoById(@PathVariable Long id){
-        Todo todo = todoService.findById(id);
-
-        if(todo == null){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(todo);
+        return ResponseEntity.ok(todoService.findById(id));
     }
 
 

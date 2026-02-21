@@ -1,6 +1,7 @@
 package com.geek24.todo_app.service;
 
 import com.geek24.todo_app.entity.Todo;
+import com.geek24.todo_app.exception.ResourceNotFoundException;
 import com.geek24.todo_app.repository.TodoRepository;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,10 @@ public class TodoService {
 
     // Get by id
     public Todo findById(Long id){
-        return todoRepository.findById(id).orElse(null);
+        return todoRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Todo not found with id: " + id)
+        );
+
     }
 
     // Delete by id
