@@ -1,0 +1,5 @@
+com/geek24/todo_app/repository/TodoRepository.class
+com/geek24/todo_app/TodoAppApplication.class
+com/geek24/todo_app/service/TodoService.class
+com/geek24/todo_app/entity/Todo.class
+com/geek24/todo_app/controller/TodoController.class
