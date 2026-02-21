@@ -20,7 +20,7 @@ public class Todo {
     @Column(nullable = false)
     private String title;
     private String description;
-    private boolean completed;
+    private Boolean completed;
     private LocalDateTime createdAt;
     @PrePersist // This means - run this method BEFORE the entity is inserted into the database.
     protected void onCreate() {

@@ -92,6 +92,19 @@ public class TodoController {
 //        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //    }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Todo> updateTodo(@PathVariable Long id, @RequestBody Todo updatedTodo){
+        Todo todo = todoService.updateTodo(id, updatedTodo);
+        return ResponseEntity.ok(todo);
+    }
+
+    //Patch Update
+    @PatchMapping("/{id}")
+    public ResponseEntity<Todo> patchTodo(@PathVariable Long id, @RequestBody Todo updatedFields){
+        Todo todo = todoService.patch(id, updatedFields);
+        return ResponseEntity.ok(todo);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTodos(@PathVariable Long id){
         todoService.delete(id);
