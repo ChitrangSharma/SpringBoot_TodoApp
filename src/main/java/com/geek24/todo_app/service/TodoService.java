@@ -1,5 +1,7 @@
 package com.geek24.todo_app.service;
 
+import com.geek24.todo_app.dto.TodoRequestDTO;
+import com.geek24.todo_app.dto.TodoResponseDTO;
 import com.geek24.todo_app.entity.Todo;
 import com.geek24.todo_app.exception.ResourceNotFoundException;
 import com.geek24.todo_app.repository.TodoRepository;
@@ -16,8 +18,13 @@ public class TodoService {
     }
 
     // Save
-    public Todo save(Todo todo){
-        return todoRepository.save(todo);
+    public TodoResponseDTO save(TodoRequestDTO requestDTO){
+        Todo todo = new Todo();
+        todo.setTitle(requestDTO.getTitle());
+        todo.setDescription(requestDTO.getDescription());
+        todo.setCompleted(requestDTO.getCompleted() != null ? requestDTO.getCompleted():false);
+        Todo saved = todoRepository.save(todo);
+        return mapToResponse(saved);
     }
 
     // Get all
@@ -67,5 +74,15 @@ public class TodoService {
     // Delete by id
     public void delete(Long id){
         todoRepository.deleteById(id);
+    }
+
+    private TodoResponseDTO mapToResponse(Todo todo){
+        TodoResponseDTO dto = new TodoResponseDTO();
+        dto.setId(todo.getId());
+        dto.setTitle(todo.getTitle());
+        dto.setDescription(todo.getDescription());
+        dto.setCompleted(todo.getCompleted());
+        dto.setCreatedAt(todo.getCreatedAt());
+        return dto;
     }
 }

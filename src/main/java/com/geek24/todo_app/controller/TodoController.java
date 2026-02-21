@@ -1,7 +1,10 @@
 package com.geek24.todo_app.controller;
 
+import com.geek24.todo_app.dto.TodoRequestDTO;
+import com.geek24.todo_app.dto.TodoResponseDTO;
 import com.geek24.todo_app.entity.Todo;
 import com.geek24.todo_app.service.TodoService;
+import jakarta.validation.Valid;
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,8 +43,8 @@ public class TodoController {
 //    }
 
     @PostMapping
-    public ResponseEntity<Todo> createTodo(@RequestBody Todo todo){
-        Todo savedTodo = todoService.save(todo);
+    public ResponseEntity<TodoResponseDTO> createTodo(@Valid @RequestBody TodoRequestDTO requestDTO){
+        TodoResponseDTO savedTodo = todoService.save(requestDTO);
         return ResponseEntity.status(201).body(savedTodo);
     }
 
