@@ -22,8 +22,12 @@ public class Todo {
     private String description;
     private Boolean completed;
     private LocalDateTime createdAt;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     @PrePersist // This means - run this method BEFORE the entity is inserted into the database.
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
     }
+
 }
