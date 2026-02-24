@@ -21,16 +21,19 @@ public class SecurityConfig {
     }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // ✅ new style
+        // new style
         return http
-                .csrf(AbstractHttpConfigurer::disable)
+//                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth->auth
                         .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/user/**").hasRole("USER")
                         .anyRequest().authenticated()
                 )
+                .logout(logout -> logout.logoutSuccessUrl("/login?logout"))
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll
                 )
-                .userDetailsService(userService)
+//                .userDetailsService(userService)
                 .build();
     }
 
